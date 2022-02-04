@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rock-paper-scissors</title>   
+
+</head>
+<body>
+<script>
+
+// the function that randomly returns the computer’s play.
+function computerPlay(){
+    let game=[
+        "rock",
+        "paper",
+        "scissors"
+    ];
+    return(game[Math.floor(Math.random()*game.length)]);
+}
+
+// function should take two parameters - the playerSelection and computerSelection - and then return a string that declares the winner of the round
+function playRound(playerSelection,computerPlay){
+    if (playerSelection===null){
+        return;
+    }
+    playerSelection = playerSelection.toLowerCase();
+    if(playerSelection===computerPlay){
+        return `It's a tie, ${playerSelection}`;
+    }
+    else if(playerSelection==="rock"&&computerPlay==="paper"){
+        return "You Lose! Paper beats Rock";
+    }
+    else if(playerSelection === "rock" && computerPlay === "scissors"){
+        return "You Win! Rock beats Scissors";
+    }
+    else if(playerSelection === "paper" && computerPlay === "rock"){
+        return "You Win! Paper beats Rock";
+    }
+    else if(playerSelection === "paper" && computerPlay === "scissors"){
+        return "You Lose! Scissors beats Paper";
+    }
+    else if(playerSelection === "scissors" && computerPlay === "paper"){
+        return "You Win! Scissors beats Paper";
+    }
+    else if(playerSelection === "scissors" && computerPlay === "rock"){
+        return "You Lose! Rock beats Scissors";
+    }
+}
+
+//function that plays a 5 round game and records the score of player & computer
+function game(){
+    let computerScore=0,playerScore=0; 
+    for(let i=0;i<5;i++){
+        let player =prompt("Enter selection");
+        let answer= playRound(player, computerPlay())
+        console.log(answer);
+        if(answer.includes("Win")){
+            playerScore++;
+        }
+        else if(answer.includes("Lose")){
+            computerScore++;
+        }
+    }
+    declareWinner(playerScore,computerScore)
+}
+
+//function that declares the winner of the game
+function declareWinner(playerScore,computerScore){
+    if(playerScore==computerScore){
+        console.log(`It's a tie with ${playerScore} points`);
+    }
+    if(playerScore>computerScore){
+        console.log(`Player is the winner with ${playerScore} points`);
+    }
+    if(playerScore<computerScore){
+        console.log(`Computer is the winner with ${computerScore} points`);
+    }
+}
+game();
+</script>
+</body>
+</html>
